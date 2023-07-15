@@ -1,3 +1,5 @@
+package org.example.product;
+
 import java.util.Objects;
 
 public class Product {

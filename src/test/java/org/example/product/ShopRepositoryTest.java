@@ -1,3 +1,5 @@
+package org.example.product;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,10 +13,28 @@ public class ShopRepositoryTest {
     @Test
     public void shouldRemoveIfExist() {
         ShopRepository repo = new ShopRepository();
+        repo.add(product1);
+        repo.add(product2);
+        repo.add(product3);
+        repo.add(product4);
+        repo.removeById(3);
 
         Product[] expected = { product1, product2, product4 };
-        Product[] actual = repo.removeById(3);
+        Product[] actual = repo.findAll();
 
         Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldRemoveIfNotExist() {
+        ShopRepository repo = new ShopRepository();
+        repo.add(product1);
+        repo.add(product2);
+        repo.add(product3);
+        repo.add(product4);
+
+        Assertions.assertThrows(NotFoundException.class, () -> {
+            repo.removeById(5);
+        });
     }
 }
